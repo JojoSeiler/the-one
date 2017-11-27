@@ -1,0 +1,166 @@
+
+#########################
+### Scenario settings ###
+
+# Name to identify the present scenario
+Scenario.name = Assignment-1
+# How frequently to sample the simulation
+Scenario.updateInterval = 0.1
+# How long the simulation will run (in seconds)
+Scenario.endTime = 16000
+
+Scenario.simulateConnections = false
+Scenario.nrofHostGroups = 2
+
+###############################
+### Movement model settings ###
+
+# seed for movement models' pseudo random number generator (default = 0)
+# MovementModel.rngSeed = 1
+# World's size for Movement Models without implicit size (width, height; in meters)
+MovementModel.worldSize = 946,720
+
+## Map based movement -movement model specific settings
+MapBasedMovement.nrofMapFiles = 30
+
+# MI-Building (Indoor)
+MapBasedMovement.mapFile1 = data/mi/01_Magistrale.wkt
+MapBasedMovement.mapFile2 = data/mi/02_HS1.wkt
+MapBasedMovement.mapFile3 = data/mi/03_Bibliothek.wkt
+MapBasedMovement.mapFile4 = data/mi/04_Sektor.wkt
+MapBasedMovement.mapFile5 = data/mi/05_Sektor.wkt
+MapBasedMovement.mapFile6 = data/mi/06_Sektor.wkt
+MapBasedMovement.mapFile7 = data/mi/07_Sektor.wkt
+MapBasedMovement.mapFile8 = data/mi/08_Sektor.wkt
+MapBasedMovement.mapFile9= data/mi/09_Sektor.wkt
+MapBasedMovement.mapFile10 = data/mi/10_Sektor.wkt
+MapBasedMovement.mapFile11 = data/mi/11_Sektor.wkt
+MapBasedMovement.mapFile12 = data/mi/12_Sektor.wkt
+MapBasedMovement.mapFile13 = data/mi/13_Sektor.wkt
+MapBasedMovement.mapFile14 = data/mi/HS2.wkt
+MapBasedMovement.mapFile15 = data/mi/HS3.wkt
+MapBasedMovement.mapFile16 = data/mi/RHalle.wkt
+
+# Main-Entrances
+MapBasedMovement.mapFile17 = data/mi/Nord-Eingang.wkt
+MapBasedMovement.mapFile18 = data/mi/Ost-Eingang.wkt
+MapBasedMovement.mapFile19 = data/mi/Sued-Eingang.wkt
+MapBasedMovement.mapFile20 = data/mi/West-Eingang.wkt
+
+# Connection Files
+MapBasedMovement.mapFile21 = data/mi/Verbindung_0102.wkt
+MapBasedMovement.mapFile22 = data/mi/Verbindung_0103.wkt
+MapBasedMovement.mapFile23 = data/mi/Verbindung_01HS2.wkt
+MapBasedMovement.mapFile24 = data/mi/Verbindung_01HS3.wkt
+MapBasedMovement.mapFile25 = data/mi/Verbindung_01RHalle.wkt
+MapBasedMovement.mapFile26 = data/mi/Verbindung_WestSued.wkt
+MapBasedMovement.mapFile27 = data/mi/Verbindung_SuedOst.wkt
+MapBasedMovement.mapFile28 = data/mi/Verbindung_WestNord.wkt
+
+MapBasedMovement.mapFile29 = data/mi/U-Bahn.wkt
+MapBasedMovement.mapFile30 = data/mi/Parkplatz.wkt
+
+
+############
+## Events ##
+Events.nrof = 0
+
+##########################
+### Network Interfaces ###
+
+myInterface.type = SimpleBroadcastInterface
+myInterface.transmitRange = 0
+myInterface.transmitSpeed = 0
+
+##############
+### Groups ###
+
+## Common settings for all groups
+
+# Mobility model for all the nodes
+Group.movementModel = ShortestPathMapBasedMovement
+# Routing protocol to be used by a node in the group
+Group.router = EpidemicRouter
+# Buffer size of any node
+Group.bufferSize = 5M
+# All nodes have the myInterface interface
+Group.nrofInterfaces = 1
+Group.interface1 = myInterface
+Group.movement = MapBasedMovement
+# Walking speeds
+Group.speed = 0.5, 1.5
+# Message TTL of 300 minutes (5 hours)
+# Group.msgTtl = 300
+
+## Group 1 Students d
+Group1.groupID = S
+Group1.nrofHosts = 10
+Group.okMaps = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+
+## Group 2 -
+Group2.groupID = B
+Group2.nrofHosts = 10
+Group2.nrofInterfaces = 1
+Group2.interface1 = myInterface
+#Group1.movementModel = OfficeActivityMovement
+#Group1.movementModel = ShortestPathMapBasedMovement
+#Group1.waitTime = 100, 300
+#Group1.speed = 1, 10
+#Group1.nrofHosts = 10
+Group2.movementModel = UniversityStaffMovement
+Group2.router = PassiveRouter
+Group2.officeLocationsFile = data/cluster/offices13.wkt
+Group2.workDayLength = 16000
+Group2.nrOfOffices = 4
+Group2.routeType = 2
+Group2.officeWaitTimeParetoCoeff = 0.5
+Group2.officeMinWaitTime = 10
+Group2.officeMaxWaitTime = 100000
+Group2.officeSize = 1
+Group2.busControlSystemNr = 4
+Group2.homeLocationsFile = data/cluster/staffhomes.wkt
+Group2.timeDiffSTD = 7200
+Group2.nrOfMeetingSpots = 1
+Group2.minGroupSize = 1
+Group2.maxGroupSize = 10
+Group2.shoppingControlSystemNr = 1
+Group2.minAfterShoppingStopTime = 3600
+Group2.maxAfterShoppingStopTime = 7200
+Group2.ownCarProb = 1
+Group2.probGoShoppingAfterWork = 0.1
+Events.nrof = 0
+myInterface.type = SimpleBroadcastInterface
+myInterface.transmitRange = 0
+myInterface.transmitSpeed = 0
+Group.nrofInterfaces = 1
+Group.interface1 = myInterface
+
+#Bibliotheksmitarbeiter (Bibliothek, Aula) 9-16
+#Cafeteriamitarbeiter (Aula) 9-16
+#Lehrstulmitarbeiter (Bibliothek, Aula, HS1, Sektion 13)
+#Putzpersonal (überall)
+#Studenten 8-19
+#Mittagspause 11-14
+
+#############
+## Reports ##
+
+# How many reports to load
+Report.nrofReports = 1
+# Directory where reports would be created
+Report.reportDir = reports/Assignment-1
+# Report classes to load
+Report.report1 = FlightLengthReport
+
+##################
+## GUI settings ##
+
+# GUI underlay image settings
+GUI.UnderlayImage.fileName = data/mi/MI_Map.jpg
+#GUI.UnderlayImage.fileName = data/helsinki_underlay.png
+# Image offset in pixels (x, y)
+GUI.UnderlayImage.offset = 0, 0
+# Scaling factor for the image
+GUI.UnderlayImage.scale = 1.0
+# Image rotation (radians)
+GUI.UnderlayImage.rotate = +0.0
